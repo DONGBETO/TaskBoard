@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr" class="transition duration-300">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Manager - Accueil</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes slideFade {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: slideFade 1.2s ease-out forwards;
+    }
+
+    .parallax {
+      background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1650&q=80');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100 min-h-screen font-sans transition duration-300">
+
+  <!-- Navbar -->
+  <header class="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400">Task Manager</h1>
+      <nav class="flex items-center space-x-6">
+        <ul class="flex space-x-6 font-medium text-gray-700 dark:text-gray-200">
+          <li><a href="#" class="hover:text-indigo-500 transition">Home</a></li>
+          <li><a href="register.html" class="hover:text-indigo-500 transition">Sign up</a></li>
+          <li><a href="login.html" class="hover:text-indigo-500 transition">Login</a></li>
+        </ul>
+        <!-- Dark mode switch -->
+        <!-- <button id="darkToggle" class="ml-4 w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+          🌙
+        </button> -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section with Parallax -->
+  <section class="py-24 fade-in parallax text-white">
+    <div class="bg-black/50 py-16 px-6 md:px-12">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <!-- Texte -->
+        <div>
+          <h2 class="text-5xl font-bold leading-tight mb-6">
+            Gérez vos tâches <span class="text-indigo-300">intelligemment</span>
+          </h2>
+          <p class="text-lg mb-8">
+            Task Manager vous aide à organiser, planifier et collaborer en toute simplicité.
+          </p>
+          <a href="register.html" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow hover:bg-indigo-700 transition duration-300">
+            Commencer maintenant
+          </a>
+        </div>
+
+        <!-- Image -->
+        <div class="text-center">
+          <img src="images/Accept tasks-amico.png" alt="Task Illustration" class="w-full max-w-sm mx-auto bg-white/80 rounded-xl p-4 shadow-lg">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="bg-white dark:bg-gray-900 py-20 transition duration-300">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold mb-14 text-gray-800 dark:text-white">Ce que vous pouvez faire avec Task Manager</h3>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="bg-indigo-50 dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-400">Planifier facilement</h4>
+          <p class="text-gray-600 dark:text-gray-300">Créez, organisez et priorisez vos tâches en quelques clics.</p>
+        </div>
+        <div class="bg-indigo-50 dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-400">Collaborer en équipe</h4>
+          <p class="text-gray-600 dark:text-gray-300">Travaillez avec vos collègues et suivez l’avancement en temps réel.</p>
+        </div>
+        <div class="bg-indigo-50 dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h4 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-400">Gagner du temps</h4>
+          <p class="text-gray-600 dark:text-gray-300">Automatisez vos processus et concentrez-vous sur l’essentiel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 bg-gray-100 dark:bg-gray-800 transition duration-300">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold mb-14 text-gray-800 dark:text-white">Ils utilisent Task Manager</h3>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+          <p class="italic text-gray-700 dark:text-gray-200">“Une solution intuitive qui m’a permis de gérer mes projets efficacement.”</p>
+          <div class="mt-4 font-semibold text-indigo-600 dark:text-indigo-400">Marie Dupont</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Chef de projet</div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+          <p class="italic text-gray-700 dark:text-gray-200">“Enfin un outil de gestion de tâches simple et complet à la fois.”</p>
+          <div class="mt-4 font-semibold text-indigo-600 dark:text-indigo-400">Lucas Martin</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Développeur</div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+          <p class="italic text-gray-700 dark:text-gray-200">“Je recommande Task Manager à toutes les équipes !”</p>
+          <div class="mt-4 font-semibold text-indigo-600 dark:text-indigo-400">Sophie Lambert</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">Consultante</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-700 text-white text-center py-6 mt-12">
+    <p>&copy; 2025 Task Manager. Tous droits réservés.</p>
+  </footer>
+
+  <!-- Dark mode script -->
+  <script>
+    const toggle = document.getElementById('darkToggle');
+    const htmlEl = document.documentElement;
+
+    toggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      localStorage.setItem('theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Load user theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      htmlEl.classList.add('dark');
+    }
+  </script>
+</body>
+</html>

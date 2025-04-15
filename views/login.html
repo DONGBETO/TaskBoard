@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOGIN | Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-10 rounded-xl shadow-md w-full max-w-sm">
+    <div class="flex items-center justify-center space-x-2">
+      <svg class="w-12 h-12 text-blue-900 mb-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+      <h2 class="text-3xl font-extrabold text-blue-800 mb-12">Task Manager</h2>
+    </div>
+
+    <!-- <h2 class="text-2xl font-semibold text-center mb-4">Se connecter</h2> -->
+
+    <form onsubmit="handleLogin(event)" class="space-y-4">
+      <input
+        type="email"
+        autocomplete="email"
+        aria-label="Adresse e-mail"
+        id="email"
+        placeholder="Entrez votre adresse e-mail"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+      <input
+        type="password"
+        id="password"
+        placeholder="Mot de passe"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+
+      <p id="error-message" class="text-sm text-red-600 hidden">
+        Adresse e-mail ou mot de passe incorrect.
+      </p>
+
+      <button
+        type="submit"
+        class="w-full py-2 px-4 bg-blue-900 text-white rounded-md hover:bg-blue-950 transition"
+      >
+        Se connecter
+      </button>
+    </form>
+    <p class="text-sm text-center text-gray-600 mt-4">
+      Vous n'avez pas un compte ?
+      <a href="register.html" class="text-blue-700 hover:underline">Inscrivez-vous</a>
+    </p>
+  </div>
+
+</body>
+</html>
