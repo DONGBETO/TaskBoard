@@ -1,5 +1,6 @@
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
+const sendEmail = require('../models/sendEmails');
 
 
 
@@ -7,32 +8,34 @@ const jwt = require('jsonwebtoken');
 exports.validateUserRole = async (req, res) => {
   const { userId } = req.params;
 
-  // Vérifier si l'utilisateur est un admin
-  // if (req.user.role !== 'admin') {
-  //   return res.status(403).json({ message: 'Vous n\'avez pas les droits pour valider un utilisateur.' });
-  // }
-
   try {
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
 
-    // Vérifier si l'utilisateur est déjà validé
     if (user.isValidated) {
       return res.status(400).json({ message: 'Cet utilisateur est déjà validé' });
     }
 
-    // Valider l'utilisateur et mettre à jour son rôle
     user.isValidated = true;
     await user.save();
 
-    res.json({ message: `Utilisateur ${user.name} validé avec succès.` });
+    // ✅ Envoi d'un e-mail de notification
+    await sendEmail({
+      to: user.email,
+      subject: `TASK MANAGER`,
+      text: `Bonjour ${user.name},\n\nVotre compte a été validé par un administrateur. Vous pouvez maintenant vous connecter à la plateforme. http://localhost:8080/api/auth/login
+      \n\nCordialement,\nL'équipe Task Manager`
+    });
+
+    res.json({ message: `Utilisateur ${user.name} validé avec succès. Un e-mail a été envoyé.` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erreur lors de la validation du rôle de l\'utilisateur' });
   }
 };
+
 
 // Créer un utilisateur
 exports.createUser = async (req, res) => {

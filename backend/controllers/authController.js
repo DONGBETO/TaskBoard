@@ -40,7 +40,7 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ message: 'Utilisateur déjà existant' });
     }
 
-    // Créer l'utilisateur avec le rôle choisi par l'utilisateur et isValidated à false
+    // Créer l'utilisateur avec le rôle choisi par l'utilisateur et isValidated  à false
     const newUser = new User({
       name,
       email,
