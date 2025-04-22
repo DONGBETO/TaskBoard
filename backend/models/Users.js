@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { 
     type: String, 
-    enum: ['admin', 'responsable', 'member'], 
+    enum: ['admin', 'responsable', 'member',], 
     default: 'member' 
   },
   isValidated: { type: Boolean, default: false },  // L'utilisateur est non validé par défaut

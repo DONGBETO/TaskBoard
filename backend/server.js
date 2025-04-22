@@ -2,12 +2,19 @@ const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require('path');
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+//Pour accéder aux fichiers ejs
+
+
+//Route pour accéder aux fichiers statiques html
+app.use(express.static(path.join(__dirname, "../views/", "publics")));
 
 // Import des routes
 const authRoutes = require("./routers/authRoutes");

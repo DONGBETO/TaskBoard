@@ -1,7 +1,17 @@
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
 
-
+// Récupération les validations en attente
+exports.getValidationsUser = async (req, res) => {
+  try {
+    const usersNotValidated = await User.find({ isValidated: false });
+    res.status(200).json(usersNotValidated);
+  } catch (err) {
+    console.log(err);
+    
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
 
 // Validation du rôle par l'admin
 exports.validateUserRole = async (req, res) => {
@@ -27,10 +37,10 @@ exports.validateUserRole = async (req, res) => {
     user.isValidated = true;
     await user.save();
 
-    res.json({ message: `Utilisateur ${user.name} validé avec succès.` });
+    return res.json({ message: `Utilisateur ${user.name} validé avec succès.` });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Erreur lors de la validation du rôle de l\'utilisateur' });
+    return res.status(500).json({ message: 'Erreur lors de la validation du rôle de l\'utilisateur' });
   }
 };
 
@@ -55,15 +65,16 @@ exports.createUser = async (req, res) => {
     }
   };
   
-  // Lister tous les utilisateurs
-  exports.getUsers = async (req, res) => {
-    try {
-      const users = await User.find();
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs' });
-    }
-  };
+// Liste des utilisateurs validés
+exports.getUsers = async (req, res) => {
+  try {
+    const validatedUsers = await User.find({ isValidated: true });
+    res.status(200).json({ users: validatedUsers });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs validés' });
+  }
+};
   
   // Récupérer un utilisateur par son ID
   exports.getUserById = async (req, res) => {
@@ -76,6 +87,17 @@ exports.createUser = async (req, res) => {
       res.status(200).json(user);
     } catch (error) {
       res.status(500).json({ message: 'Erreur lors de la récupération de l\'utilisateur' });
+    }
+  };
+
+  //Récupérer les inscriptions validées
+  exports.getValidatedUsers = async (req, res) => {
+    try {
+      const validatedUsers = await User.find({ isValidated: true });
+      res.status(200).json(validatedUsers);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Erreur lors de la récupération des utilisateurs validés" });
     }
   };
   

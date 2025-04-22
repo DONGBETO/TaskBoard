@@ -1,5 +1,6 @@
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 // Schéma de validation avec Joi pour l'inscription
 const Joi = require('joi');
@@ -22,9 +23,27 @@ const registerSchema = Joi.object({
   })
 });
 
+// Route spécifique pour afficher la page d'inscription
+exports.getDashboard = (req, res) => {
+  res.render("../views/dashboard");
+}
+
+// Route spécifique pour afficher la page d'inscription
+exports.getRegister = (req, res) => {
+  res.sendFile(path.join(__dirname, "../../views/publics","register.html"));
+}
+// Route spécifique pour afficher la page de connexion
+exports.getLogin = (req, res) => {
+  res.sendFile(path.join(__dirname, "../../views/publics","login.html"));
+}
+
+
 // Inscription
+
 exports.registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
+  // console.log("Requête reçue avec body :", req.body); // 👈 Ajoute ça pour voir le contenu
+
 
   // Validation avec Joi
   const { error } = registerSchema.validate({ name, email, password, role });
@@ -37,7 +56,10 @@ exports.registerUser = async (req, res) => {
     // Vérifier si l'utilisateur existe déjà
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: 'Utilisateur déjà existant' });
+       return res.status(409).json({ 
+        success: false,
+        field: email,
+        message: 'Utilisateur déjà existant' });
     }
 
     // Créer l'utilisateur avec le rôle choisi par l'utilisateur et isValidated à false
@@ -51,6 +73,12 @@ exports.registerUser = async (req, res) => {
 
     // Sauvegarder l'utilisateur
     await newUser.save();
+    return res.status(201).json({
+       message: 'Inscription réussie et en attente de validation par un administrateur.' 
+      });
+
+    // .status(400).json({ : 'Erreur lors de l\'inscription' });
+
 
     // // Générer un token JWT
     // const token = jwt.sign({ id: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -58,7 +86,7 @@ exports.registerUser = async (req, res) => {
     // res.status(201).json({ token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Erreur lors de l\'inscription' });
+    return res.status(500).json({ message: 'Erreur lors de l\'inscription' });
   }
 };
 
@@ -76,7 +104,7 @@ exports.loginUser = async (req, res) => {
 
     // Vérifier si l'utilisateur est validé
     if (!user.isValidated) {
-      return res.status(400).json({ message: 'Votre rôle est en attente de validation par un administrateur.' });
+      return res.status(403).json({ message: 'Votre rôle est en attente de validation par un administrateur.' });
     }
 
     // Générer un token JWT

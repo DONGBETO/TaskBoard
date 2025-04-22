@@ -1,11 +1,13 @@
 const express = require('express');
 const { createUser, getUsers, getUserById, updateUser, deleteUser } = require('../controllers/adminController'); // Correction des imports
-const { validateUserRole } = require('../controllers/adminController');  // Importation de la fonction validateUserRole
+const { validateUserRole, getValidationsUser, getValidatedUsers} = require('../controllers/adminController');  // Importation de la fonction validateUserRole
 const authenticate = require('../middlewares/auth'); 
 const checkRole = require('../middlewares/role'); 
 
 const router = express.Router();
 
+router.get('/validations', getValidationsUser);
+router.get('/invitations-validated', getValidatedUsers);
 router.post('/users', authenticate, checkRole('admin'), createUser);
 router.get('/users', authenticate, checkRole('admin'), getUsers);
 router.get('/users/:id', authenticate, checkRole('admin'), getUserById);
